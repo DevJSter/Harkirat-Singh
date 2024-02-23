@@ -22,22 +22,58 @@ var calculateSum = function(counter) {
   return sum;
 }
 
+function calMul(counter){
+  var mul = 1;
+  for(let i = 1; i <= counter; i++){
+    mul = mul*i;
+  }
+  return mul;
+
+}
+ 
 function handleFirstRequest(req, res) {
   // console.log(req.body); //Body parser helps to parse the data sent from the body to backend and it parses the json to simple data
   //As using the express we can only use the the headers to send the data to the backend ,,but Body-Parser changes everything
   var counter = req.body.counter || 10;
-  if(counter < 1000000){
     
   var finalsum = calculateSum(counter);
-  res.send('Sum is ' + finalsum);
-  }
-  else{
-    res.status(411).send("Youve sent a big number are ypu dumb?");
-}
+  var findmul = calMul(counter);
+
+//By using JSon we can send the data in the fotm
+  var ansobj = {
+    sum: finalsum,
+    mul: findmul
+  } // Through this we can return the data in the json format
+
+  // res.send('Sum is ' + finalsum); //res.send is used to send the response to the client
+  res.status(200).send(ansobj);
+
+   
+
 }
 
 app.get('/sum', handleFirstRequest)
 
+function givePage(req, res) {
+  // res.send(`<!DOCTYPE html>
+  // <html lang="en-US">
+  // <head>
+  //  <meta charset="UTF-8">
+  //  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  //  <title>Document</title>
+  // </head>
+  // <body>
+  //  <h1>Hello ji Kaise ho saare </h1>
+  // </body>
+  // </html>`);
+
+  var randomobj = { 
+    name: "Sachin"
+  };
+  res.send(randomobj);
+}
+
+app.get( '/' , givePage); 
 
 function fun(req, res) {
   var random = Math.random(); //random number between 0 and 1
@@ -84,5 +120,4 @@ app.listen(port, startServer);
 
 
 // Responses from the server other than data it can also return status codes, headers and body.
-
 
