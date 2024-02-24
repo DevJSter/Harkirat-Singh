@@ -6,3 +6,6 @@ function callback(err,data) {
 }
 
 fs.readFile("a.txt", 'utf-8', callback);
+
+
+// Path: Week-2/FileWrite.js
