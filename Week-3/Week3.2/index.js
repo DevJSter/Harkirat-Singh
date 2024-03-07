@@ -7,12 +7,31 @@ let ADMINS = [];
 let USERS = [];
 let COURSES = [];
 
+function adminAuthentication(req,res,next) {
+
+    
+
+
+}
+
 // Admin routes
 app.post("/admin/signup", (req, res) => {
   // logic to sign up admin
-});
+  const admin = req.body;
+  const existingAdmin = ADMINS.find(a => a.username === admin.username);
 
-app.post("/admin/login", (req, res) => {
+  if(existingAdmin) {
+    res.status(403).json ({message : 'Admin already exists'});
+  } else { 
+    ADMINS.push(admin);
+    res.json ({
+        message : 'Admin Created succesfully'
+    })
+  }
+
+  );
+
+app.post("/admin/login", adminAuthentication,(req, res) => {
   // logic to log in admin
 });
 
