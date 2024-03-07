@@ -8,8 +8,7 @@
   <script>
     function print(data) {
       var parentElement = document.getElementById("main");
-      // parentElement.innerHTML = JSON.stringify(data);
-      
+
       for (var i = 0; i < data.length; i++) {
         var childElement = document.createElement("div");
 
@@ -21,6 +20,12 @@
 
         var grandChildElement3 = document.createElement("button");
         grandChildElement3.innerHTML = "Delete";
+        
+        console.log(data[i].id);
+
+        grandChildElement3.onClick = function () {
+          deleteTodo(data[i].id);
+        };
 
         childElement.appendChild(grandChildElement1);
         childElement.appendChild(grandChildElement2);
@@ -56,6 +61,26 @@
         .then(getcb)
         .catch((error) => console.error("Error:", error));
     }
+
+    const deleteTodo = async (id) => {
+      try {
+        const response = await fetch(`/todos/:${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.status === 200) {
+          console.log("Todo deleted successfully");
+        } else if (response.status === 404) {
+          console.log("Todo not found");
+        } else {
+          console.log("Failed to delete todo");
+        }
+      } catch (error) {
+        console.error("Error deleting todo:", error);
+        // Handle network or other errors
+      }
+    };
+
   </script>
   <body>
     Title : <br />
