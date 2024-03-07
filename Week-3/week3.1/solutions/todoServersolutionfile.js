@@ -28,7 +28,7 @@ app.get("/todos", (req, res) => {
     if (err) throw err;
     console.log("Get request");
     res.json(JSON.parse(data));
-  });
+  }); 
 });
 
 app.get("/todos/:id", (req, res) => {
