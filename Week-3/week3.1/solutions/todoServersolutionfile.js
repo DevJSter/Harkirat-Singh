@@ -1,9 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 const fs = require("fs");
 const path = require("path");
 const app = express();
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -23,14 +23,15 @@ function removeAtIndex(arr, index) {
   return newArray;
 }
 
-app.get('/todos', (req, res) => {
+app.get("/todos", (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
+    console.log("Get request");
     res.json(JSON.parse(data));
   });
 });
 
-app.get('/todos/:id', (req, res) => {
+app.get("/todos/:id", (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
@@ -43,16 +44,18 @@ app.get('/todos/:id', (req, res) => {
   });
 });
 
-app.post('/todos', (req, res) => {
+app.post("/todos", (req, res) => {
   const newTodo = {
     id: Math.floor(Math.random() * 1000000), // unique random id
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
   };
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
+
     todos.push(newTodo);
+    console.log("Post request");
     fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
       if (err) throw err;
       res.status(201).json(newTodo);
@@ -60,7 +63,7 @@ app.post('/todos', (req, res) => {
   });
 });
 
-app.put('/todos/:id', (req, res) => {
+app.put("/todos/:id", (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
@@ -71,7 +74,7 @@ app.put('/todos/:id', (req, res) => {
       const updatedTodo = {
         id: todos[todoIndex].id,
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
       };
       todos[todoIndex] = updatedTodo;
       fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
@@ -82,8 +85,7 @@ app.put('/todos/:id', (req, res) => {
   });
 });
 
-app.delete('/todos/:id', (req, res) => {
-
+app.delete("/todos/:id", (req, res) => {
   fs.readFile("todos.json", "utf8", (err, data) => {
     if (err) throw err;
     const todos = JSON.parse(data);
@@ -100,8 +102,8 @@ app.delete('/todos/:id', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,"index.html"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // for all other routes, return 404
@@ -109,9 +111,8 @@ app.get('/', (req, res) => {
 //   res.status(404).send();
 // });
 
-
 app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+  console.log("Server listening on port 3000");
 });
 
 module.exports = app;

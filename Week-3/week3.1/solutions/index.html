@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo-App</title>
-</head>
-<script>
-
-function parsedResponse(response) {
-        console.log(response);
+  </head>
+  <script>
+    function print(data) {
+      var parentElement = document.getElementById("main");
+      // parentElement.innerHTML = JSON.stringify(data);
+      var childElement = document.createElement("div");
+      childElement.innerHTML = "Krsna";
+      parentElement.appendChild(childElement);
     }
 
-function cb(resp) {
-        resp.json().then(parsedResponse);
+    function getcb(resp) {
+      resp.json().then(print);
     }
 
-function Press() {
-    fetch('http://localhost:3000/todos/', {
-        method: 'POST',
-        body : JSON.stringify({
-            title: document.getElementById('title').value,
-            description: document.getElementById('Description').value
+    function PostPress() {
+      fetch("http://localhost:3000/todos/", {
+        method: "POST",
+        body: JSON.stringify({
+          title: document.getElementById("title").value,
+          description: document.getElementById("Description").value,
         }),
         headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(cb);
-}
+          "Content-Type": "application/json",
+        },
+      })
+        .then(getcb)
+        .catch((error) => console.error("Error:", error));
+    }
 
-
-</script>
-<body>
-    Title : <br>
-    <input type="text" id="title">
-    <br><br>
-    Todo Description: <br>
-    <input type="text" id="Description">
-    <button onclick="Press()">Send todo</button>
-</body>
+    function GetPress() {
+      fetch("http://localhost:3000/todos", {
+        method: "GET",
+      })
+        .then(getcb)
+        .catch((error) => console.error("Error:", error));
+    }
+  </script>
+  <body>
+    Title : <br />
+    <input type="text" id="title" />
+    <br /><br />
+    Todo Description: <br />
+    <input type="text" id="Description" />
+    <button onclick="PostPress()">Send todo</button>
+    <button onclick="GetPress()">Get Todo</button>
+    <div id="main"></div>
+  </body>
 </html>
