@@ -118,7 +118,15 @@ app.post("/users/courses/:courseId", UserAuthentication ,(req, res) => {
 
 app.get("/users/purchasedCourses", (req, res) => {
   // logic to view purchased courses
-
+  // const purchasedCourses = COURSES.find(c => req.user.purchasedCourses.include(c.id));
+  var user = req.user.purchasedCourses; [1,4];   
+  var purchasedCourses = [];
+  for(let i=0 ; i<COURSES.length ; i++){
+    if(purchasedCoursesIds.IndexOf(COURSES[i].id) != -1) {
+      purchasedCourses.push(COURSES[i]);
+    }
+  }
+  res.json({course : purchasedCourses});
 
 });
 
