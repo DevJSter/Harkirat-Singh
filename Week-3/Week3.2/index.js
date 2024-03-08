@@ -116,7 +116,7 @@ app.post("/users/courses/:courseId", UserAuthentication ,(req, res) => {
    }
 });
 
-app.get("/users/purchasedCourses", (req, res) => {
+app.get("/users/purchasedCourses", UserAuthentication, (req, res) => {
   // logic to view purchased courses
   // const purchasedCourses = COURSES.find(c => req.user.purchasedCourses.include(c.id));
   var user = req.user.purchasedCourses; [1,4];   
