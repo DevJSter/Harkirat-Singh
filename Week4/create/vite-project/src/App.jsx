@@ -21,18 +21,22 @@ function App() {
       <h1>Hello </h1> {todo.title}
       {todo.description}
       {todo.id}
-      <PersonName firstName={todo.description} lastName={todo.id} />
+      <PersonName firstName={todo.description} lastName={todo.id}>
+        {" "}
+      </PersonName>
     </>
   );
 }
 
-// props are read only and can be rendered only 
-// state variables are also used pass the data from parent to child component or pass as the cvalues to the props 
+// props are read only and can be rendered only
+// state variables are also used pass the data from parent to child component or pass as the cvalues to the props
 
 function PersonName(props) {
-  <div>
-    {props.firstName} {props.lastName}
-  </div>
+  return (
+    <div>
+      {props.firstName}, {props.lastName}
+    </div>
+  );
 }
 
 export default App;
