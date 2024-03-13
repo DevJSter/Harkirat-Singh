@@ -1,6 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 
+var todoForToday = {
+  title: "Go to Gym",
+  time: "From 7 to 11",
+  description: "Go to gym and do the workout",
+};
+
 function App() {
   const [todo, setTodo] = useState({
     title: "My first todo",
@@ -30,13 +36,14 @@ function App() {
 
 // props are read only and can be rendered only
 // state variables are also used pass the data from parent to child component or pass as the cvalues to the props
+//Conponents can accept the props and can be used to render the data
 
-function PersonName(props) {
-  return (
-    <div>
-      {props.firstName}, {props.lastName}
-    </div>
-  );
-}
+// function PersonName(props) {
+//   return (
+//     <div>
+//       {props.firstName}, {props.lastName}
+//     </div>
+//   );
+// }
 
 export default App;
