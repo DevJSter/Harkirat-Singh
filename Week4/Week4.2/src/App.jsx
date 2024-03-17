@@ -40,7 +40,7 @@ function App() {
           <p>{todo.id}</p>
         </div>
       );
-    };
+    })}
       <PersonName firstName={todo.description} lastName={todo.id}>
         {" "}
       </PersonName>
