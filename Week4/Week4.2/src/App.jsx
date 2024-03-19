@@ -19,14 +19,28 @@ function App() {
       title: " Khana khalo",
       description: "khana time se khana hai bhai",
       id: 64544,
+    },{
+      title: "My first todo",
+      description: "My first",
+      id: 45,
+    },{
+      title: "My first todo",
+      description: "My first",
+      id: 789,
     });
   }, 2000);
 
   return (
     <>
-      <h1>Hello </h1> {todo.title}
-      {todo.description}
-      {todo.id}
+    {todo.map((todo) => {
+      return (
+        <div>
+          <h1>{todo.title}</h1>
+          <p>{todo.description}</p>
+          <p>{todo.id}</p>
+        </div>
+      );
+    };
       <PersonName firstName={todo.description} lastName={todo.id}>
         {" "}
       </PersonName>
