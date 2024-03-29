@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 
 const App = () => {
-  const [todoForToday, setTodoForToday] = React.useState([])
+  const [todoForToday, setTodoForToday] = React.useState([]);
 
   React.useEffect(() => {
     fetch("http://localhost:3000/todos", {
       method: "GET",
-    })
-      .then((res) => res.json().then((data) => setTodoForToday(data)));
+    }).then((res) => res.json().then((data) => setTodoForToday(data)));
   }, []);
 
   // setTimeout(() => {
