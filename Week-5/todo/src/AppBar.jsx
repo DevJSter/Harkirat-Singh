@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+// import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
 
 export default function ButtonAppBar() {
@@ -24,10 +24,22 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Coursera
           </Typography>
-          <Button color="inherit" onClick={() => {}}>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.location = "/signup";
+            }}
+          >
             Signup
           </Button>
-          <Button color="inherit">SignIn</Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              window.location = "/signin";
+            }}
+          >
+            SignIn
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
