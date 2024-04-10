@@ -5,11 +5,8 @@ import Appbar from "./Appbar.jsx";
 import AddCourse from "./AddCourse.jsx";
 import Courses from "./Courses";
 import Course from "./Course";
-import { useEffect, useState } from 'react';
-import axios from "axios";
 
-
-function App() {
+const App = () => {
 
     return (
         <div style={{width: "100vw",
