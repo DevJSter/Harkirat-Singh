@@ -1,4 +1,5 @@
-import Counter from "./components/Counter";
+import "./styles.css";
+import Counter from "./components/Count";
 import { useDispatch } from "react-redux";
 
 export default function App() {
