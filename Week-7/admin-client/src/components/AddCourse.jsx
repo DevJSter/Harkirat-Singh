@@ -56,7 +56,7 @@ function AddCourse() {
                 <Button
                     size={"large"}
                     variant="contained"
-                    onClick={async () => {
+                    onClick={async () => {      
                         await axios.post(`${BASE_URL}/admin/courses`, {
                             title: title,
                                 description: description,
