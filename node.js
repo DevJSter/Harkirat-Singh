@@ -15,3 +15,5 @@ const newArray = arr.map((value) => {
 
 console.log(newArray);
 
+console.log(newArray+newArray);
+
