@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.cursorStyleInactive": "outline",
+    "terminal.explorerKind": "integrated",
+    "terminal.integrated.automationProfile.linux": {}
+}
