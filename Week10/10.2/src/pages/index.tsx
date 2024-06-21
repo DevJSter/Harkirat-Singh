@@ -40,7 +40,8 @@ export default function Home() {
                               }}
                           >Signin</Button>
                       </div>
-                  </div>}
+                  </div>
+                  }
               </div>
               <div>
               </div>
