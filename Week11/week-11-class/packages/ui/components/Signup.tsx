@@ -1,7 +1,11 @@
 import { Card, TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
 
-// <Signup onClick={() => {}} />
+interface typeEmail {
+    username: string,
+    password : string
+}
+
 export function Signup(props: {
     onClick: (username: string, password: string) => void
 }) {
