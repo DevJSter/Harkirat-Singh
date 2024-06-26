@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo-App</title>
+  </head>
+  <script>
+    function print(data) {
+      var parentElement = document.getElementById("main");
+
+      for (var i = 0; i < data.length; i++) {
+        var childElement = document.createElement("div");
+
+        var grandChildElement1 = document.createElement("span");
+        grandChildElement1.innerHTML = data[i].title;
+
+        var grandChildElement2 = document.createElement("span");
+        grandChildElement2.innerHTML = data[i].description;
+
+        var grandChildElement3 = document.createElement("button");
+        grandChildElement3.innerHTML = "Delete";
+        
+        console.log(data[i].id);
+
+        grandChildElement3.onClick = function () {
+          deleteTodo(data[i].id);
+        };
+
+        childElement.appendChild(grandChildElement1);
+        childElement.appendChild(grandChildElement2);
+        childElement.appendChild(grandChildElement3);
+
+        parentElement.appendChild(childElement);
+      }
+    }
+
+    function getcb(resp) {
+      resp.json().then(print);
+    }
+
+    function PostPress() {
+      fetch("http://localhost:3000/todos/", {
+        method: "POST",
+        body: JSON.stringify({
+          title: document.getElementById("title").value,
+          description: document.getElementById("Description").value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(getcb)
+        .catch((error) => console.error("Error:", error));
+    }
+
+    function GetPress() {
+      fetch("http://localhost:3000/todos", {
+        method: "GET",
+      })
+        .then(getcb)
+        .catch((error) => console.error("Error:", error));
+    }
+
+    const deleteTodo = async (id) => {
+      try {
+        const response = await fetch(`/todos/:${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.status === 200) {
+          console.log("Todo deleted successfully");
+        } else if (response.status === 404) {
+          console.log("Todo not found");
+        } else {
+          console.log("Failed to delete todo");
+        }
+      } catch (error) {
+        console.error("Error deleting todo:", error);
+        // Handle network or other errors
+      }
+    };
+
+  </script>
+  <body>
+    Title : <br />
+    <input type="text" id="title" />
+    <br /><br />
+    Todo Description: <br />
+    <input type="text" id="Description" />
+    <button onclick="PostPress()">Send todo</button>
+    <button onclick="GetPress()">Get Todo</button>
+    <div id="main"></div>
+  </body>
+</html>
