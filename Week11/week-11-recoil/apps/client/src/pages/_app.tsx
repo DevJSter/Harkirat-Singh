@@ -25,3 +25,40 @@ function App2({Component, pageProps}) {
     <Component {...pageProps} /> 
   </div>
 }
+
+function InitUser() {
+  const setUser = useSetRecoilState(userState);
+  const init = async() => {
+      try {
+          const response = await axios.get(`/api/auth/me`, {
+              headers: {
+                  "Authorization": "Bearer " + localStorage.getItem("token")
+              }
+          })
+
+          if (response.data.user) {
+              setUser({
+                  isLoading: false,
+                  userEmail: response.data.user.username
+              })
+          } else {
+              setUser({
+                  isLoading: false,
+                  userEmail: null
+              })
+          }
+      } catch (e) {
+
+          setUser({
+              isLoading: false,
+              userEmail: null
+          })
+      }
+  };
+
+  useEffect(() => {
+      init();
+  }, []);
+
+  return <></>
+}
