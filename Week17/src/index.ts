@@ -1,8 +1,8 @@
 import WebSocket from 'ws';
 import assert from 'assert';
 
-const ws = new WebSocket('ws://localhost:8080');
 
+const ws = new WebSocket('ws://localhost:8080');
 interface Message {
     action: string;
     id?: string;
@@ -96,7 +96,3 @@ function sendAndWait(message: Message): Promise<string> {
 
     ws.close();
 })();
-
-
-
-
